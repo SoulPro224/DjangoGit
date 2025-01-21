@@ -1,0 +1,70 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+{% load static %}
+
+<!-- Titre centré avec design modernisé -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 text-center">  <!-- Centrage du titre -->
+            <h1 class="display-4 font-weight-bold" style="color: #2c3e50;">Bienvenue dans mon blog</h1>
+            <p class="lead" style="color: #7f8c8d;">Explorez des articles intéressants sur divers sujets</p>
+        </div>
+    </div>
+</div>
+
+<!-- Filtres par catégorie et tag avec effet visuel -->
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h5 style="color: #2980b9;">Filtrer par Catégorie</h5>
+            <form method="GET">
+                <select name="category" class="form-control custom-select shadow-sm" style="background-color: #ecf0f1; border: none;" onchange="this.form.submit()">
+                    <option value="">Toutes les catégories</option>
+                    {% for category in categories %}
+                        <option value="{{ category.name }}" {% if selected_category == category.name %}selected{% endif %}>
+                            {{ category.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h5 style="color: #2980b9;">Filtrer par Tag</h5>
+            <form method="GET">
+                <select name="tag" class="form-control custom-select shadow-sm" style="background-color: #ecf0f1; border: none;" onchange="this.form.submit()">
+                    <option value="">Tous les tags</option>
+                    {% for tag in tags %}
+                        <option value="{{ tag.name }}" {% if selected_tag == tag.name %}selected{% endif %}>
+                            {{ tag.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <!-- Affichage des articles avec 4 par ligne -->
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-md-3">  <!-- Utilisation de col-md-3 pour 4 articles par ligne -->
+                <div class="card mb-4 shadow-sm" style="border-radius: 10px; overflow: hidden;">
+                    <div class="card-img-wrapper" style="height: 200px; overflow: hidden;">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}" style="object-fit: cover; height: 100%;">
+                        {% else %}
+                            <img src="{% static 'path/to/default_image.jpg' %}" class="card-img-top" alt="Image par défaut" style="object-fit: cover; height: 100%;">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: #34495e;">{{ post.title }}</h5>
+                        <p class="card-text" style="color: #7f8c8d;">{{ post.summary }}</p>
+                        <a href="{% url 'blog:post_detail' post.pk %}" class="btn btn-outline-primary btn-block" style="border-radius: 25px;">Lire l'article</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <link rel="stylesheet" href="{% load static %}styles.css">
+</head>
+<body>
+    <header>
+        <nav style="display: flex; justify-content: space-between;">
+            <ul>
+                {% comment %} <li><a href="{% url 'tasks:task_list' %}">Tasks</a></li> {% endcomment %}
+                <!-- Ajoutez d'autres liens ici -->
+            </ul>
+
+            <!-- Bouton de déconnexion en haut à droite -->
+            <ul>
+                {% if user.is_authenticated %}
+                    <li style="list-style-type: none;">
+                        <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" style="background:none;border:none;color:blue;cursor:pointer;">Se déconnecter</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Se connecter</a></li>
+                    <li><a href="{% url 'tasks:signup' %}">S'inscrire</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+
+
+{% comment %} {% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Mon application{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur mon application</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'tasks:task_list' %}">Tâches</a></li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <form id="logout-form" action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Se déconnecter</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Se connecter</a></li>
+                    <li><a href="{% url 'tasks:signup' %}">S'inscrire</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 Mon Application</p>
+    </footer>
+</body>
+</html> {% endcomment %}

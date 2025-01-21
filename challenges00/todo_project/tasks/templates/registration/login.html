@@ -1,0 +1,20 @@
+<!-- login.html -->
+{% extends 'registration/base_generic.html' %}
+
+{% block content %}
+    <h2>Connexion</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Affiche le formulaire de connexion -->
+        <button type="submit">Se connecter</button>
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            <p>Échec de la connexion. Assurez-vous que votre nom d'utilisateur et votre mot de passe sont corrects.</p>
+            <p>Si vous avez oublié votre mot de passe, vous pouvez le réinitialiser en cliquant <a href="{% url 'password_reset' %}">ici</a>.</p>
+        </div>
+        {% endif %}
+    </form>
+{% endblock %}
+
+
+

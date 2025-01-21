@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Modifier le commentaire</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+        <a href="{% url 'blog:post_detail' pk=comment.post.pk %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

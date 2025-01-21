@@ -1,0 +1,66 @@
+/* static/users/style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-container img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+.profile-container p {
+    font-size: 16px;
+    color: #666;
+    margin: 10px 0;
+}
+
+.profile-container a {
+    display: inline-block;
+    font-size: 16px;
+    color: #007bff;
+    text-decoration: none;
+    margin: 10px 5px;
+}
+
+.profile-container a:hover {
+    text-decoration: underline;
+}
+
+.profile-container .actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-container .actions a {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.profile-container .actions a:hover {
+    background-color: #0056b3;
+}

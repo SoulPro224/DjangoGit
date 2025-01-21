@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if task.id %}Modifier{% else %}Ajouter{% endif %} une Tâche</title>
+</head>
+<body>
+    <h1>{% if task.id %}Modifier{% else %}Créer{% endif %} une Tâche</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <!-- Afficher la date de création uniquement si la tâche existe déjà -->
+        {% if task.id %}
+            <div>
+                <label>Date de création:</label>
+                <input type="text" value="{{ task.created_at }}" readonly>
+            </div>
+        {% endif %}
+        <button type="submit">Enregistrer</button>
+    </form>
+    <a href="{% url 'tasks:task_list' %}">Retour à la liste des tâches</a>
+</body>
+</html>
